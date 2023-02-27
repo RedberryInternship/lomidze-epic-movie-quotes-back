@@ -12,7 +12,7 @@ class RegisterController extends Controller
 {
 	public function register(StoreRegisterRequest $request)
 	{
-		if (Email::where('email', $request->email)->first())
+		if (Email::where('email', $request->email)->first() || User::where('gmail', $request->email)->first())
 		{
 			return response([
                 'errors'=> ['email' => __('main.already_registered')

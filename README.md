@@ -109,23 +109,12 @@ php artisan migrate
 Since this api utilizes Laravel sanctum for SPA authentication, we executed these steps:
 
 ```sh
-composer require laravel/sanctum
-```
-```sh
 php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 ```
 ```sh
 php artisan migrate
 ```
-we added Sanctum's middleware to api in app/Http/Kernel.php file:
-```sh
-'api' => [
-    \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-    \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
-    \Illuminate\Routing\Middleware\SubstituteBindings::class,
-]
-```
-
+we added Sanctum's middleware in app/Http/Kernel.php file:
 
 #
 ### Laravel sanctum
