@@ -96,14 +96,6 @@ if you've completed getting started section, generate app key:
 ```sh
 php artisan key:generate
 ```
-
-#
-### Migration
-then migrating database is fairly simple process, just execute:
-```sh
-php artisan migrate
-```
-
 #
 ### Laravel sanctum
 Since this api utilizes Laravel sanctum for SPA authentication, we executed these steps:
@@ -111,10 +103,15 @@ Since this api utilizes Laravel sanctum for SPA authentication, we executed thes
 ```sh
 php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 ```
+we added Sanctum's middleware in app/Http/Kernel.php file
+
+
+#
+### Migration
+then migrating database is fairly simple process, just execute:
 ```sh
 php artisan migrate
 ```
-we added Sanctum's middleware in app/Http/Kernel.php file:
 
 #
 ### Laravel sanctum
