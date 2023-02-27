@@ -105,6 +105,53 @@ php artisan migrate
 ```
 
 #
+### Laravel sanctum
+Since this api utilizes Laravel sanctum for SPA authentication, we executed these steps:
+
+```sh
+composer require laravel/sanctum
+```
+```sh
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+```
+```sh
+php artisan migrate
+```
+we added Sanctum's middleware to api in app/Http/Kernel.php file:
+```sh
+'api' => [
+    \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+    \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+    \Illuminate\Routing\Middleware\SubstituteBindings::class,
+]
+```
+
+
+#
+### Laravel sanctum
+Before using Socialite, we need to add credentials for the OAuth providers, as we utilize google authentication for this application
+```sh
+'github' => [
+    'client_id' => env('GITHUB_CLIENT_ID'),
+    'client_secret' => env('GITHUB_CLIENT_SECRET'),
+    'redirect' => 'http://example.com/callback-url',
+],
+```
+For it to work, we should visit google website and register api, that will provide necessary tokens.  
+
+#
+### Pusher
+Our app implements pusher broadcasting api.
+You should register pusher website and retrieve these values that should be set in env:
+
+```sh
+PUSHER_APP_ID=your-pusher-app-id
+PUSHER_APP_KEY=your-pusher-key
+PUSHER_APP_SECRET=your-pusher-secret
+PUSHER_APP_CLUSTER=mt1
+```
+
+#
 ### Publish assets
 To create the symbolic link to make assets accessible from the web
 ```sh

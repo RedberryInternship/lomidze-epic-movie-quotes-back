@@ -53,4 +53,12 @@ class Quote extends Model
         $this->attributes['quote_title'] = json_encode($this->translations['quote_title'], JSON_UNESCAPED_UNICODE);
         return parent::save($options);
     }
+
+    public function scopePaginateQuery($query, $per_page = 3, $sort = 'desc', $select = ['id', 'user_id', 'movie_id', 'quote_image', 'quote_title'])
+	{
+		return $query
+			->select($select)
+			->orderBy('id', $sort)
+			->paginate($per_page);
+	}
 }
