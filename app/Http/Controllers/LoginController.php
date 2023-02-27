@@ -24,7 +24,7 @@ class LoginController extends Controller
 
 		$user ??= $email->user;
 
-		auth()->login($user);
+		auth()->login($user, (bool)$request->remember_me);
 		request()->session()->regenerate();
 		return response(['user' => auth()->user()]);
 	}
