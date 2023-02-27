@@ -21,7 +21,7 @@ class QuoteController extends Controller
 		switch ($type)
 		{
 			case '@':
-				$movies = Movie::where('movie_title', 'like', '%' . ltrim($search, '@') . '%')->get()->paginateQuery();
+				$movies = Movie::where('movie_title', 'like', '%' . ltrim($search, '@') . '%')->get();
 				$results = Quote::whereIn('movie_id', $movies->pluck('id')->toArray())->paginateQuery();
 				break;
 			case '#':
