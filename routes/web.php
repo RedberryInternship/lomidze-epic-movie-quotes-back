@@ -15,13 +15,3 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function (Request $request) {
-	// $user = User::where('id', 229)->first();
-	// if ($request->email === $user->email)
-	// {
-	// 	$user['email'] = $user->primary_email;
-	// 	$user->update();
-	// }
-	// Email::where('email', $request->email)->delete();
-});

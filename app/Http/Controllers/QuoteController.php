@@ -10,12 +10,9 @@ use App\Models\Like;
 use App\Models\Movie;
 use App\Models\Notification;
 use App\Models\Quote;
-use App\Helpers\Queries;
 
 class QuoteController extends Controller
 {
-	use Queries;
-
 	public function index()
 	{
 		$search = urldecode(request()->input('search'));
@@ -25,13 +22,13 @@ class QuoteController extends Controller
 		{
 			case '@':
 				$movies = Movie::where('movie_title', 'like', '%' . ltrim($search, '@') . '%')->get();
-				$results = $this->paginateQuery(Quote::whereIn('movie_id', $movies->pluck('id')->toArray()));
+				$results = Quote::whereIn('movie_id', $movies->pluck('id')->toArray())->paginateQuery();
 				break;
 			case '#':
-				$results = $this->paginateQuery(Quote::where('quote_title', 'like', '%' . ltrim($search, '#') . '%'));
+				$results = Quote::where('quote_title', 'like', '%' . ltrim($search, '#') . '%')->paginateQuery();
 				break;
 			default:
-				$results = $this->paginateQuery(Quote::where('quote_title', 'like', "%{$search}%"));
+				$results = Quote::where('quote_title', 'like', "%{$search}%")->paginateQuery();
 		}
 
 		return response()->json($results);

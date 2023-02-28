@@ -19,7 +19,7 @@ class GoogleController extends Controller
 	public function handleProviderCallback()
 	{
 		$provider_user = Socialite::driver('google')->stateless()->user();
-		if (Email::where('email', $provider_user->email))
+		if (Email::where('email', $provider_user->email)->first())
 		{
 			return response()->json(['message' => __('main.already_registered')], 422);
 		}
